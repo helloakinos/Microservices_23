@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrderService";
+
+service GrpcOrder {
+    rpc GetAllOrders (GetAllRequest) returns (OrderResponse);
+}
+
+message GetAllRequest {}
+
+message GrpcOrderModel{
+    int32 OrderId = 1;
+    string Close = 2;
+    bool IsPurchase = 3;
+    string TransactionAmount = 4;
+    string Date = 5;
+}
+
+message OrderResponse {
+    repeated GrpcOrderModel order = 1;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "StockInfo";
+
+package GetApi;
+
+service GrpcApi {
+    rpc GetAllStocks (GetAllApis) returns (ApiResponse);
+}
+
+message GetAllApis {}
+
+message ApiPublishDto{
+    int32 ApiId = 1;
+    string Date = 2;
+    string High = 3;
+    string Low = 4;
+    string Open = 5;
+    string Close = 6;
+    bool IsPurchase =7;
+    string TransactionAmount = 8;
+}
+
+message ApiResponse {
+    repeated ApiPublishDto stockinfo = 1;
+}

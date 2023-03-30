@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tradeanalysis-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tradeanalysis
+  template:
+    metadata:
+      labels:
+        app: tradeanalysis
+    spec:
+      containers:
+      - name: tradeanalysis
+        image: helloakinos/tradeanalysis:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tradeanalysis-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: tradeanalysis
+  ports:
+  - name: tradeanalysis
+    protocol: TCP
+    port: 80
+    targetPort: 80

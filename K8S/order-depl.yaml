@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: helloakinos/order:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: order
+  ports:
+  - name: order
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: ordergrpc
+    protocol: TCP
+    port: 123
+    targetPort: 123
